@@ -1,0 +1,10 @@
+﻿{
+  "Descriptor": {
+    "UId": "2866e223-5bf9-4626-ac06-7f097b7e18fc",
+    "Name": "NavLogger",
+    "ModifiedOnUtc": "\/Date(1569571126000)\/",
+    "ManagerName": "SourceCodeSchemaManager",
+    "Caption": "Исходный код Logger",
+    "DependsOn": []
+  }
+}
