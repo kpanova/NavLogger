@@ -1,0 +1,84 @@
+﻿{
+  "Descriptor": {
+    "UId": "5b0bfee0-88b5-4e00-a62e-5353cfe1fbcf",
+    "Name": "NavLogger_ContactFile_logFile",
+    "ModifiedOnUtc": "\/Date(1569829483000)\/",
+    "InstallType": 0,
+    "Schema": {
+      "UId": "e9eafee9-c4e4-4793-ad0a-003bd2c6a9b4",
+      "Name": "ContactFile"
+    },
+    "Columns": [
+      {
+        "ColumnUId": "8f7c60c3-7d35-4de4-a234-6e18470eb34c",
+        "IsForceUpdate": false,
+        "IsKey": false,
+        "ColumnName": "Notes",
+        "DataTypeValueUId": "c0f04627-4620-4bc0-84e5-9419dc8516b1"
+      },
+      {
+        "ColumnUId": "f906243b-8d5c-48f0-8220-89d5c9175806",
+        "IsForceUpdate": false,
+        "IsKey": false,
+        "ColumnName": "LockedOn",
+        "DataTypeValueUId": "d21e9ef4-c064-4012-b286-fa1a8171da44"
+      },
+      {
+        "ColumnUId": "6b37344b-b460-44c5-9fd7-a623689bba4c",
+        "IsForceUpdate": false,
+        "IsKey": false,
+        "ColumnName": "LockedBy",
+        "DataTypeValueUId": "b295071f-7ea9-4e62-8d1a-919bf3732ff2"
+      },
+      {
+        "ColumnUId": "6255f70e-45c9-4346-8ee0-8d604459e7d8",
+        "IsForceUpdate": false,
+        "IsKey": false,
+        "ColumnName": "Type",
+        "DataTypeValueUId": "b295071f-7ea9-4e62-8d1a-919bf3732ff2"
+      },
+      {
+        "ColumnUId": "f442867d-73ca-49b3-a8ba-8a2566b1fc59",
+        "IsForceUpdate": false,
+        "IsKey": false,
+        "ColumnName": "Contact",
+        "DataTypeValueUId": "b295071f-7ea9-4e62-8d1a-919bf3732ff2"
+      },
+      {
+        "ColumnUId": "ae0e45ca-c495-4fe7-a39d-3ab7278e1617",
+        "IsForceUpdate": false,
+        "IsKey": true,
+        "ColumnName": "Id",
+        "DataTypeValueUId": "23018567-a13c-4320-8687-fd6f9e3699bd"
+      },
+      {
+        "ColumnUId": "4a35bb09-6c8c-4de8-8773-4e9e3b3cf3b0",
+        "IsForceUpdate": false,
+        "IsKey": false,
+        "ColumnName": "Name",
+        "DataTypeValueUId": "ddb3a1ee-07e8-4d62-b7a9-d0e618b00fbd"
+      },
+      {
+        "ColumnUId": "8d8676ce-6974-4157-9a96-841d4499fccb",
+        "IsForceUpdate": false,
+        "IsKey": false,
+        "ColumnName": "Version",
+        "DataTypeValueUId": "6b6b74e2-820d-490e-a017-2b73d4ccf2b0"
+      },
+      {
+        "ColumnUId": "73c5b07b-3c1a-44fc-953e-f2ce6cbb7420",
+        "IsForceUpdate": false,
+        "IsKey": false,
+        "ColumnName": "Data",
+        "DataTypeValueUId": "b7342b7a-5dde-40de-aa7c-24d2a57b3202"
+      },
+      {
+        "ColumnUId": "5d9d91dd-892d-4652-8da1-e7a53b96ba4a",
+        "IsForceUpdate": false,
+        "IsKey": false,
+        "ColumnName": "Size",
+        "DataTypeValueUId": "6b6b74e2-820d-490e-a017-2b73d4ccf2b0"
+      }
+    ]
+  }
+}

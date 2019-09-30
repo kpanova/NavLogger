@@ -7,12 +7,15 @@ namespace Terrasoft.Configuration
     using Terrasoft.Core;
     using System.Web;
     using Terrasoft.Core.DB;
+    using Quartz;
+    using System.Threading.Tasks;
+    using Quartz.Impl;
 
 
 
     public class NavLogger
     {
-        private static UserConnection Connection;
+        public static UserConnection Connection;
         public static Guid Supervisor = new Guid("410006E1-CA4E-4502-A9EC-E54D922D2C00");
 
 
@@ -36,7 +39,17 @@ namespace Terrasoft.Configuration
         {
             text = DateTime.Now.ToString() + " Error: " + text + "\r\n";
             UpdateLogFile(text);
- 
+
+        }
+        public void RecordTimingStart(string text)
+        {
+            text = $"{DateTime.Now}.{DateTime.Now.Millisecond} Operation: {text} started\r\n";
+            UpdateLogFile(text);
+        }
+        public void RecordTimingEnd(string text)
+        {
+            text = $"{DateTime.Now}.{DateTime.Now.Millisecond} Operation: {text} ended\r\n";
+            UpdateLogFile(text);
         }
 
         private void UpdateLogFile(string text)
@@ -69,5 +82,18 @@ namespace Terrasoft.Configuration
             }
         }
     }
-    
+    //public class NavLoggerWriter : IJob
+    //{
+    //    public async Task Execute(IJobExecutionContext context)
+    //    {
+    //    }
+    //}
+
+    //public class NavLoggerWriterScheduler
+    //{
+    //    public static async void Start()
+    //    {
+    //    }
+    //}
+
 }

@@ -1,0 +1,51 @@
+﻿{
+  "PackageData": [
+    {
+      "Row": [
+        {
+          "SchemaColumnUId": "f442867d-73ca-49b3-a8ba-8a2566b1fc59",
+          "Value": "410006e1-ca4e-4502-a9ec-e54d922d2c00",
+          "DisplayValue": "Supervisor"
+        },
+        {
+          "SchemaColumnUId": "73c5b07b-3c1a-44fc-953e-f2ce6cbb7420",
+          "Value": "MzAuMDkuMjAxOSAxMDozODowNS4xNzggT3BlcmF0aW9uOiBPcmRlclNhdmUgc3RhcnRlZA0KMzAuMDkuMjAxOSAxMDozODowNS4xOTQgT3BlcmF0aW9uOiBQYXJzZUZvcm0ob3JkZXJEYXRhKSBzdGFydGVkDQozMC4wOS4yMDE5IDEwOjM4OjA1LjIwMyBPcGVyYXRpb246IFBhcnNlRm9ybShvcmRlckRhdGEpIGVuZGVkDQozMC4wOS4yMDE5IDEwOjM4OjA1LjIxMCBPcGVyYXRpb246IFNhdmVPcmRlckRhdGEob3JkZXJEYXRhKSBzdGFydGVkDQozMC4wOS4yMDE5IDEwOjM4OjA4LjM0NyBPcGVyYXRpb246IFNhdmVPcmRlckRhdGEob3JkZXJEYXRhKSBlbmRlZA0KMzAuMDkuMjAxOSAxMDozODowOC40NzUgT3BlcmF0aW9uOiBPcmRlclNhdmUgZW5kZWQNCg=="
+        },
+        {
+          "SchemaColumnUId": "ae0e45ca-c495-4fe7-a39d-3ab7278e1617",
+          "Value": "20b2a64c-e92b-45ee-88b6-824e454afaae"
+        },
+        {
+          "SchemaColumnUId": "6b37344b-b460-44c5-9fd7-a623689bba4c",
+          "Value": "null",
+          "DisplayValue": ""
+        },
+        {
+          "SchemaColumnUId": "f906243b-8d5c-48f0-8220-89d5c9175806",
+          "Value": "null"
+        },
+        {
+          "SchemaColumnUId": "4a35bb09-6c8c-4de8-8773-4e9e3b3cf3b0",
+          "Value": "log.txt"
+        },
+        {
+          "SchemaColumnUId": "8f7c60c3-7d35-4de4-a234-6e18470eb34c",
+          "Value": ""
+        },
+        {
+          "SchemaColumnUId": "5d9d91dd-892d-4652-8da1-e7a53b96ba4a",
+          "Value": 0
+        },
+        {
+          "SchemaColumnUId": "6255f70e-45c9-4346-8ee0-8d604459e7d8",
+          "Value": "529bc2f8-0ee0-df11-971b-001d60e938c6",
+          "DisplayValue": "Файл"
+        },
+        {
+          "SchemaColumnUId": "8d8676ce-6974-4157-9a96-841d4499fccb",
+          "Value": 1
+        }
+      ]
+    }
+  ]
+}

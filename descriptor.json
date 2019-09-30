@@ -2,8 +2,14 @@
   "Descriptor": {
     "UId": "1b4fd69e-917d-4bdc-9212-fc732cce4cb3",
     "Name": "NavLogger",
-    "ModifiedOnUtc": "\/Date(1569569565000)\/",
+    "ModifiedOnUtc": "\/Date(1569829385000)\/",
     "Maintainer": "Navicon",
-    "DependsOn": []
+    "DependsOn": [
+      {
+        "UId": "5be3998b-c5c3-42bb-a01c-2e4149059a97",
+        "PackageVersion": "7.8.0",
+        "Name": "Base"
+      }
+    ]
   }
 }
