@@ -1,0 +1,10 @@
+﻿{
+  "Descriptor": {
+    "UId": "3ecdfa01-d1f1-461f-9c1d-d20cec608dee",
+    "Name": "NavSetLoggerUserConnectionProcess",
+    "ModifiedOnUtc": "\/Date(1570023244000)\/",
+    "ManagerName": "ProcessSchemaManager",
+    "Caption": "Бизнес-процесс 3",
+    "DependsOn": []
+  }
+}

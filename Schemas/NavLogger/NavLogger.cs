@@ -1,60 +1,48 @@
+using System;
+using System.Linq;
+using System.Text;
+using Terrasoft.Core;
+using Terrasoft.Core.DB;
+using Quartz;
+using System.Threading.Tasks;
+using Quartz.Impl;
+
 namespace Terrasoft.Configuration
 {
-    using System;
-    using System.Linq;
-    using Terrasoft.Common;
-    using System.Text;
-    using Terrasoft.Core;
-    using System.Web;
-    using Terrasoft.Core.DB;
-    using Quartz;
-    using System.Threading.Tasks;
-    using Quartz.Impl;
-
-
-
     public class NavLogger
     {
-        public static UserConnection Connection;
+        public static UserConnection Connection { get; set; }
         public static Guid Supervisor = new Guid("410006E1-CA4E-4502-A9EC-E54D922D2C00");
+        private static StringBuilder _oldText = new StringBuilder();
+        private static StringBuilder _currentText = new StringBuilder();
 
-
-        public NavLogger(UserConnection userConnection)
+        public static void Info(string text)
         {
-            Connection = userConnection;
+            var time = DateTime.Now;
+            _currentText.AppendLine($"{time}.{time.Millisecond} Info: {text}");
         }
 
-        public NavLogger()
+        public static void Error(string text)
         {
-            Connection = (UserConnection)HttpContext.Current.Session["UserConnection"];
+            var time = DateTime.Now;
+            _currentText.AppendLine($"{time}.{time.Millisecond} Error: " + text + "");
+        }
+        public static void RecordTimingStart(string text)
+        {
+            var time = DateTime.Now;
+            _currentText.AppendLine($"{time}.{time.Millisecond} Operation: {text} started");
+        }
+        public static void RecordTimingEnd(string text)
+        {
+            var time = DateTime.Now;
+            _currentText.AppendLine($"{time}.{time.Millisecond} Operation: {text} ended");
         }
 
-        public void Info(string text)
+        public static void UpdateLogFile()
         {
-            text = DateTime.Now.ToString() + " Info: " + text + "\r\n";
-            UpdateLogFile(text);
-        }
-
-        public void Error(string text)
-        {
-            text = DateTime.Now.ToString() + " Error: " + text + "\r\n";
-            UpdateLogFile(text);
-
-        }
-        public void RecordTimingStart(string text)
-        {
-            text = $"{DateTime.Now}.{DateTime.Now.Millisecond} Operation: {text} started\r\n";
-            UpdateLogFile(text);
-        }
-        public void RecordTimingEnd(string text)
-        {
-            text = $"{DateTime.Now}.{DateTime.Now.Millisecond} Operation: {text} ended\r\n";
-            UpdateLogFile(text);
-        }
-
-        private void UpdateLogFile(string text)
-        {
-            byte[] newLog = Encoding.UTF8.GetBytes(text);
+            _oldText = new StringBuilder(_currentText.ToString());
+            _currentText = new StringBuilder();
+            byte[] newLog = Encoding.UTF8.GetBytes(_oldText.ToString());
             byte[] oldLog = GetOldTExt();
 
             if (oldLog != null)
@@ -68,7 +56,7 @@ namespace Terrasoft.Configuration
             updateLog.Execute();
         }
 
-        private byte[] GetOldTExt()
+        private static byte[] GetOldTExt()
         {
             var sel = new Select(Connection)
                .Column("Data")
@@ -82,18 +70,34 @@ namespace Terrasoft.Configuration
             }
         }
     }
-    //public class NavLoggerWriter : IJob
-    //{
-    //    public async Task Execute(IJobExecutionContext context)
-    //    {
-    //    }
-    //}
+    public class NavLoggerWriter : IJob
+    {
+        public async Task Execute(IJobExecutionContext context)
+        {
+            await Task.Run(() => NavLogger.UpdateLogFile());
+        }
+    }
 
-    //public class NavLoggerWriterScheduler
-    //{
-    //    public static async void Start()
-    //    {
-    //    }
-    //}
+    public class NavLoggerWriterScheduler
+    {
+        public static bool Started;
+        public static async void Start()
+        {
+            IScheduler scheduler = await StdSchedulerFactory.GetDefaultScheduler();
+            await Task.Run(() => scheduler.Start());
+
+            IJobDetail job = JobBuilder.Create<NavLoggerWriter>().Build();
+
+            ITrigger trigger = TriggerBuilder.Create()
+                .WithIdentity("UpdateLog", "UpdateLogGroup")
+                .StartAt(DateTimeOffset.UtcNow.AddSeconds(5))
+                .WithSimpleSchedule(x => x
+                    .WithIntervalInSeconds(5)
+                    .RepeatForever())
+                .Build();
+
+            await Task.Run(() => scheduler.ScheduleJob(job, trigger)); 
+        }
+    }
 
 }
