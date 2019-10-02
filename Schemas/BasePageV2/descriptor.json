@@ -1,0 +1,14 @@
+﻿{
+  "Descriptor": {
+    "UId": "e2a04c9d-d6c7-4f30-bfcb-819f95336c38",
+    "Name": "BasePageV2",
+    "ModifiedOnUtc": "\/Date(1570003269000)\/",
+    "Parent": {
+      "UId": "d3cc497c-f286-4f13-99c1-751c468733c0",
+      "Name": "BasePageV2"
+    },
+    "ExtendParent": true,
+    "ManagerName": "ClientUnitSchemaManager",
+    "Caption": "Базовая схема карточки"
+  }
+}
