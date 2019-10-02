@@ -1,4 +1,6 @@
 define("BasePageV2", [], function() {
+	var FileName;
+	var FilePath;
 	return {
 		methods: {
 			init:function () {
@@ -9,14 +11,32 @@ define("BasePageV2", [], function() {
 					    fn: this.onKeyPress
 					}]);
 				},
-				
-			onKeyPress: function(arguments){
-				var url = 'http://localhost:1003/0/rest/FileService/GetFile/e9eafee9-c4e4-4793-ad0a-003bd2c6a9b4/20b2a64c-e92b-45ee-88b6-824e454afaae';
+			lookupCallback: function(args){
+				var fileId = args.selectedRows.collection.items[0].Id;
+				var urlPattern = "{0}/rest/FileService/GetFile/{1}/{2}";
+				var workspaceBaseUrl = Terrasoft.utils.uri.getConfigurationWebServiceBaseUrl();
+				var url = Ext.String.format(urlPattern, workspaceBaseUrl, FilePath, fileId);
 				window.open(url);
-			}
-			
+			},
+			onKeyPress: function(arguments){
+				this.callService({
+						serviceName: "NavLoggerHelper",
+						methodName: "GetSysSettingValue",
+					},
+					function(response) {
+						FileName = response.GetSysSettingValueResult.Item2;
+						FilePath = response.GetSysSettingValueResult.Item1;
 
-			
+						var config = {
+							entitySchemaName: FileName,
+							// Множественный выбор отключен.
+							multiSelect: false,
+							// Отображаемая колонка — [Name].
+							columns: ["Name"]
+						};
+						this.openLookup(config, this.lookupCallback, this);
+					}, this);
+			}
 		},
 		diff: /**SCHEMA_DIFF*/[]/**SCHEMA_DIFF*/
 	};
