@@ -2,7 +2,7 @@
   "Descriptor": {
     "UId": "1d521884-776f-4b5d-88c0-d0488f60abee",
     "Name": "NavDailyCreatingNewLoggerFileProcess",
-    "ModifiedOnUtc": "\/Date(1570003673000)\/",
+    "ModifiedOnUtc": "\/Date(1570087455000)\/",
     "ManagerName": "ProcessSchemaManager",
     "Caption": "Бизнес-процесс 3",
     "DependsOn": []

@@ -11,8 +11,11 @@ namespace Terrasoft.Configuration
 {
     public class NavLogger
     {
-        public static UserConnection Connection { get; set; }
         public static Guid Supervisor = new Guid("410006E1-CA4E-4502-A9EC-E54D922D2C00");
+        public static UserConnection Connection { get; set; }
+        public static Guid CurrentLogFileGuid { get; set; }
+        public static string FileEntityName { get; set; }
+
         private static StringBuilder _oldText = new StringBuilder();
         private static StringBuilder _currentText = new StringBuilder();
 
@@ -40,6 +43,7 @@ namespace Terrasoft.Configuration
 
         public static void UpdateLogFile()
         {
+            ReadFileData();
             _oldText = new StringBuilder(_currentText.ToString());
             _currentText = new StringBuilder();
             byte[] newLog = Encoding.UTF8.GetBytes(_oldText.ToString());
@@ -50,9 +54,9 @@ namespace Terrasoft.Configuration
                 newLog = oldLog.Concat(newLog).ToArray();
             }
 
-            var updateLog = new Update(Connection, "ContactFile")
+            var updateLog = new Update(Connection, FileEntityName)
                     .Set("Data", Column.Parameter(newLog))
-                    .Where("ContactId").IsEqual(Column.Parameter(Supervisor));
+                    .Where("Id").IsEqual(Column.Parameter(CurrentLogFileGuid));
             updateLog.Execute();
         }
 
@@ -60,14 +64,27 @@ namespace Terrasoft.Configuration
         {
             var sel = new Select(Connection)
                .Column("Data")
-               .From("ContactFile")
-               .Where("ContactId").IsEqual(Column.Parameter(Supervisor))
+               .From(FileEntityName)
+                    .Where("Id").IsEqual(Column.Parameter(CurrentLogFileGuid))
                as Select;
 
             using (var dbExecutor = Connection.EnsureDBConnection())
             {
                 return sel.ExecuteScalar<byte[]>();
             }
+        }
+
+        private static void ReadFileData()
+        {
+            NavLoggerHelper loggerHelper = new NavLoggerHelper(Connection);
+            FileEntityName = loggerHelper.GetSysSettingValue().name;
+            CurrentLogFileGuid = new Guid(Core.Configuration.SysSettings.GetValue(Connection, "NavActualLoggerFile").ToString());
+        }
+
+        public static void ClearLog()
+        {
+            _oldText = new StringBuilder();
+            _currentText = new StringBuilder();
         }
     }
     public class NavLoggerWriter : IJob

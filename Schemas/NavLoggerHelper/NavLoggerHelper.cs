@@ -10,22 +10,23 @@ using Terrasoft.Common;
 using System.Linq;
 using Terrasoft.Core.DB;
 
-namespace Terrasoft.Configuration.CampaignService
+namespace Terrasoft.Configuration
 {
 
     [ServiceContract]
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     public class NavLoggerHelper
     {
-
-
         private static UserConnection Connection;
         private string _LoggerFile = "NavActualLoggerFile";
 
 
         public NavLoggerHelper(UserConnection userConnection)
         {
-            Connection = userConnection;
+            if(userConnection != null)
+                Connection = userConnection;
+            else
+                Connection = (UserConnection)HttpContext.Current.Session["UserConnection"];
         }
 
         public NavLoggerHelper()
