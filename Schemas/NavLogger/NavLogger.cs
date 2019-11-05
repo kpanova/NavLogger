@@ -6,6 +6,8 @@ using Terrasoft.Core.DB;
 using Quartz;
 using System.Threading.Tasks;
 using Quartz.Impl;
+using System.Diagnostics;
+using System.Globalization;
 
 namespace Terrasoft.Configuration
 {
@@ -18,27 +20,32 @@ namespace Terrasoft.Configuration
 
         private static StringBuilder _oldText = new StringBuilder();
         private static StringBuilder _currentText = new StringBuilder();
-
         public static void Info(string text)
         {
-            var time = DateTime.Now;
-            _currentText.AppendLine($"{time}.{time.Millisecond} Info: {text}");
+            _currentText.AppendLine($"{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss.fff")}\tInfo: {text}");
         }
 
         public static void Error(string text)
         {
-            var time = DateTime.Now;
-            _currentText.AppendLine($"{time}.{time.Millisecond} Error: " + text + "");
+            _currentText.AppendLine($"{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss.fff")}\tError: " + text + "");
         }
         public static void RecordTimingStart(string text)
         {
-            var time = DateTime.Now;
-            _currentText.AppendLine($"{time}.{time.Millisecond} Operation: {text} started");
+            _currentText.AppendLine($"{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss.fff")}\tOperation: {text} started");
+        }
+        public static void RecordTimingStart(string text, Stopwatch stopwatch)
+        {
+            stopwatch.Start();
+            _currentText.AppendLine($"{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss.fff")}\tOperation: {text} started");
         }
         public static void RecordTimingEnd(string text)
         {
-            var time = DateTime.Now;
-            _currentText.AppendLine($"{time}.{time.Millisecond} Operation: {text} ended");
+            _currentText.AppendLine($"{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss.fff")}\tOperation: {text} ended");
+        }
+        public static void RecordTimingEnd(string text, Stopwatch stopwatch)
+        {
+            stopwatch.Stop();
+            _currentText.AppendLine($"{DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss.fff")}\tOperation: {text} ended, the oparation time is:\t{stopwatch.ElapsedMilliseconds} ms\t{stopwatch.ElapsedTicks} ticks");
         }
 
         public static void UpdateLogFile()
